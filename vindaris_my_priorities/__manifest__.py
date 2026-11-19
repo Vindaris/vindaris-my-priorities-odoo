@@ -1,13 +1,13 @@
 # Vindaris "My Priorities" — Odoo module.
-# Shows a Vindaris member their goals and open tasks inside Odoo, by iframing
-# the hosted https://app.vindaris.com/embed/priorities surface. The module
-# holds only its own per-instance credentials (registered once at connect);
-# every viewer is authenticated by a one-time account link done from a
-# logged-in Vindaris session, so no API keys are pasted and no password is
-# handled here.
+# Shows a Vindaris member their goals and open tasks inside Odoo, by iframing the
+# hosted https://app.vindaris.com/embed/odoo surface. The module is views +
+# static assets only (no server Python), so it installs on Odoo Online via Apps
+# -> Import Module, as well as on Odoo.sh and self-hosted. All auth happens in
+# Vindaris: the embed page signs the user in (first-party popup) and holds a
+# short-lived token. No API keys and no passwords are handled in Odoo.
 {
     'name': 'Vindaris: My Priorities',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'summary': 'See your Vindaris goals and tasks inside Odoo',
     'description': """
 Vindaris: My Priorities
@@ -18,11 +18,10 @@ the tasks assigned to you, rendered from your Vindaris workspace.
 
 How it connects
 ---------------
-* An administrator connects Odoo to Vindaris once (Settings -> Vindaris ->
-  Connect). The module registers with Vindaris and stores its own connection
-  credentials; nothing is copied by hand.
-* Each user links their Odoo account to their Vindaris account once, from a
-  logged-in Vindaris page. No API keys, no shared passwords.
+Open My Priorities and sign in to Vindaris once in the window that opens. From
+then on your goals and tasks show inside Odoo. No API keys, no passwords, and no
+server code: the module is views and static assets only, so it imports on Odoo
+Online as well as Odoo.sh and self-hosted.
 
 The screen is read-only.
 """,
@@ -32,9 +31,8 @@ The screen is read-only.
     'license': 'LGPL-3',
     # First image is the Apps store cover/thumbnail.
     'images': ['static/description/banner.png'],
-    'depends': ['base_setup', 'web'],
+    'depends': ['web'],
     'data': [
-        'views/res_config_settings_views.xml',
         'views/vindaris_menu.xml',
     ],
     'assets': {

@@ -1,36 +1,19 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { Component, onWillStart, useState } from "@odoo/owl";
-import { rpc } from "@web/core/network/rpc";
+import { Component } from "@odoo/owl";
 
-// The "My Priorities" screen. On open it asks the Odoo backend for this user's
-// Vindaris embed URL and iframes it. If the account is not linked yet it shows
-// a Connect button; if the admin has not connected Odoo to Vindaris it says so.
+// "My Priorities" screen. It mounts an iframe of the hosted Vindaris embed page,
+// which handles sign-in and renders the user's goals and tasks. All logic lives
+// in Vindaris, so this module carries no server code and imports on Odoo Online.
+const VINDARIS_EMBED_URL = "https://app.vindaris.com/embed/odoo";
+
 export class VindarisPriorities extends Component {
     static template = "vindaris_my_priorities.VindarisPriorities";
     static props = ["*"];
 
     setup() {
-        this.state = useState({ status: "loading", embedUrl: null, linkUrl: null });
-        onWillStart(async () => {
-            try {
-                const res = await rpc("/vindaris/priorities/url");
-                if (res && res.embedUrl) {
-                    this.state.embedUrl = res.embedUrl;
-                    this.state.status = "ready";
-                } else if (res && res.linkUrl) {
-                    this.state.linkUrl = res.linkUrl;
-                    this.state.status = "connect";
-                } else if (res && res.status === "unconfigured") {
-                    this.state.status = "unconfigured";
-                } else {
-                    this.state.status = "error";
-                }
-            } catch {
-                this.state.status = "error";
-            }
-        });
+        this.src = VINDARIS_EMBED_URL;
     }
 }
 
