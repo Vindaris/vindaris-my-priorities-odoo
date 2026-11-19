@@ -30,6 +30,8 @@ The screen is read-only.
     'author': 'Vindaris',
     'website': 'https://vindaris.com',
     'license': 'LGPL-3',
+    # First image is the Apps store cover/thumbnail.
+    'images': ['static/description/banner.png'],
     'depends': ['base_setup', 'web'],
     'data': [
         'views/res_config_settings_views.xml',
