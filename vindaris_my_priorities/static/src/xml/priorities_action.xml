@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="vindaris_my_priorities.VindarisPriorities">
+        <div class="o_vindaris_priorities d-flex flex-column" style="height: 100%; width: 100%;">
+            <t t-if="state.status === 'loading'">
+                <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+                    Loading your priorities...
+                </div>
+            </t>
+            <t t-elif="state.status === 'ready'">
+                <iframe t-att-src="state.embedUrl"
+                        title="My Priorities"
+                        style="width: 100%; height: 100%; border: 0; flex: 1 1 auto;"/>
+            </t>
+            <t t-elif="state.status === 'connect'">
+                <div class="d-flex flex-column align-items-center justify-content-center h-100 gap-3 text-center p-4">
+                    <p class="text-muted mb-0">Connect your Vindaris account to see your priorities here.</p>
+                    <a t-att-href="state.linkUrl" target="_blank" rel="noopener" class="btn btn-primary">
+                        Connect to Vindaris
+                    </a>
+                </div>
+            </t>
+            <t t-elif="state.status === 'unconfigured'">
+                <div class="d-flex align-items-center justify-content-center h-100 text-muted text-center p-4">
+                    Vindaris is not connected yet. An administrator can connect it in
+                    Settings, under Vindaris.
+                </div>
+            </t>
+            <t t-else="">
+                <div class="d-flex align-items-center justify-content-center h-100 text-muted text-center p-4">
+                    Could not load your priorities right now. Try reopening this screen shortly.
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

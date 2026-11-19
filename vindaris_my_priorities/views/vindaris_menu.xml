@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Client action that mounts the OWL "My Priorities" component. -->
+    <record id="action_vindaris_priorities" model="ir.actions.client">
+        <field name="name">My Priorities</field>
+        <field name="tag">vindaris_my_priorities.priorities</field>
+    </record>
+
+    <!-- Top-level app menu -> My Priorities. -->
+    <menuitem id="menu_vindaris_root"
+              name="Vindaris"
+              sequence="95"/>
+    <menuitem id="menu_vindaris_priorities"
+              name="My Priorities"
+              parent="menu_vindaris_root"
+              action="action_vindaris_priorities"
+              sequence="1"/>
+</odoo>
