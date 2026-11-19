@@ -11,7 +11,7 @@
     # with the running instance's own series at load, so it installs on Odoo
     # Online (saas~19.x) as well as Odoo.sh / self-hosted 19.0. A series-prefixed
     # version like '19.0.x' is read as "not installable" on Online (saas~19.4).
-    'version': '2.0.2',
+    'version': '2.0.3',
     'summary': 'See your Vindaris goals and tasks inside Odoo',
     'description': """
 Vindaris: My Priorities
